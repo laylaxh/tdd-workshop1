@@ -1,0 +1,19 @@
+{
+  "name": "tdd_demo_javascript",
+  "version": "1.0.0",
+  "description": "TDD tutorial exercise",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IdahoEv/tdd_exercise_javascript.git"
+  },
+  "author": "Evan Dorn",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/IdahoEv/tdd_exercise_javascript/issues"
+  },
+  "homepage": "https://github.com/IdahoEv/tdd_exercise_javascript#readme"
+}
