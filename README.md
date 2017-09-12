@@ -10,10 +10,12 @@ You'll need a recent version of npm installed, and a web browser.  On a mac, `br
 
 ## Setup
 
-To be set up for the workshop / exercise, you'll need to install npm modules with:
+To be set up for the workshop / exercise, you'll need to clone this repo, cd to it, and install npm modules:
 
 ```bash
-npm install
+$ git clone git@github.com:IdahoEv/tdd_exercise_javascript.git
+$ cd tdd_exercise_javascript
+$ npm install
 ```
 
 ### Confirming correct setup
