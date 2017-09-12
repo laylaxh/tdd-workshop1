@@ -1,3 +1,3 @@
 document.body.onload = () => {
-  document.getElementById('title').innerHTML = "It Works!";
+  document.getElementById('header').innerHTML = "<h1>It Works!</h1>";
 };
