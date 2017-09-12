@@ -1,8 +1,7 @@
 # TDD exercise
 
 Repo for a basic TDD exercise in JavaScript.  `master` branch contains the
-starting point and instructions.  Completed exercise is built in the 
-`exercise` branch.
+starting point and instructions. 
 
 ## Prerequisites
 
