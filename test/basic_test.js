@@ -2,8 +2,8 @@ import { expect } from 'chai';
 
 describe('Array', () => {
   describe('#indexOf()', () => {
-    it('should return -1 when the value is not present', function() {
-      expect([1,2,3].indexOf(4)).to.eql(-1);
+    it('should return the index of the value', function() {
+      expect([1,2,3].indexOf(3)).to.eql(2);
     });
   });
 });

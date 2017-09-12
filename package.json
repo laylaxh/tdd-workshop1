@@ -4,7 +4,8 @@
   "description": "TDD tutorial exercise",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --require babel-polyfill --compilers js:babel-register"
+    "test": "mocha --require babel-polyfill --compilers js:babel-register",
+    "watch": "mocha -w --require babel-polyfill --compilers js:babel-register"
   },
   "repository": {
     "type": "git",
