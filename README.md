@@ -6,7 +6,7 @@ starting point and instructions.  Completed exercise is built in the
 
 ## Prerequisites
 
-You'll need a recent version of npm installed, and a web browser.  On a mac, `brew install npm` should do it. 
+You'll need a recent version of npm installed, and a web browser.  On a mac with [homebrew](https://brew.sh/) installed, `brew install npm` should do it. For other systems, please refer to the [Node/npm installation instructions](https://docs.npmjs.com/getting-started/installing-node) or the package manager for your environment.
 
 ## Setup
 
