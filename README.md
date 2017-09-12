@@ -24,7 +24,7 @@ If your setup is correct, you should be able to do these four things:
 
 * Run the tests once. Run `npm test` on the command line and you should see a single test pass successfully.
 * Run the test suite repeatedly. Run `npm run watch`: you should see the tests run once, then pause.  They will re-run when you edit the files.  (Try it with `test/basic_test.js`!)  Quit with CTRL-c
-* Build the app!  Execute `webpack` at the command line, which should create `build/app.js`.  The output should look something like this:
+* Build the app!  Execute `npm run build` at the command line, which should create `build/app.js`.  The output should look something like this:
 ```bash
 [20:16:35 tdd_demo_javascripr]$ webpack
 Hash: 77a4dc5ca299c310ab91
