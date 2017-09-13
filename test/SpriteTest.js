@@ -33,8 +33,7 @@ describe('Sprite', () => {
       expect(sprite.position).to.eql({ x: 0.25, y: -4.95});
     });    
   });
-
-    
+ 
   describe('Getting and setting properties', () => {
     it('sets the velocity if the argument is properly formatted', () => {
       const sprite = new Sprite();
@@ -98,10 +97,7 @@ describe('Sprite', () => {
       sprite.rotation = -420;
       expect(sprite.rotation).to.eql(300);            
     });
-
-    
   });
-  
   
   describe('Instantiation', () => {
     
