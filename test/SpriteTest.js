@@ -2,114 +2,124 @@ import { expect } from 'chai';
 import Sprite from '../src/Sprite';
 
 describe('Sprite', () => {
-  describe('updating position', () => {
-    it('doesn\'t change position if velocity is zero', () => {
+  describe('Updating the position based on time and velocity', () => {
+    it('Doesn\'t change the position if no time has elapsed', () => {
       const sprite = new Sprite();
-      sprite.position = { x: 1.0, y: 2.0 }
-      sprite.velocity = { x: 0.0, y: 0.0 }
-      sprite.updateSelf(1.0);
+      sprite.velocity = { x: 1.0, y: 2.0 };
+      expect(sprite.position).to.eql({ x: 0.0, y: 0.0});
+      sprite.updatePosition(0.0);
+      expect(sprite.position).to.eql({ x: 0.0, y: 0.0});        
+    });
+    
+    it('Correctly increments the position for 1.0 elapsed seconds', () => {
+      const sprite = new Sprite();
+      sprite.velocity = { x: 1.0, y: 2.0 };
+      expect(sprite.position).to.eql({ x: 0.0, y: 0.0});
+      sprite.updatePosition(1.0);
+      expect(sprite.position).to.eql({ x: 1.0, y: 2.0});        
+    });    
+    it('Correctly increments the position with negative velocity components', () => {
+      const sprite = new Sprite();
+      sprite.velocity = { x: -1.5, y: -3.5 };
+      expect(sprite.position).to.eql({ x: 0.0, y: 0.0});
+      sprite.updatePosition(0.5);
+      expect(sprite.position).to.eql({ x: -0.75, y: -1.75});        
+    });    
+    it('Correctly increments the position with nonzero starting point', () => {
+      const sprite = new Sprite();
+      sprite.position = { x: 1.0, y: -3.2 };
+      sprite.velocity = { x: -1.5, y: -3.5 };
+      sprite.updatePosition(0.5);
+      expect(sprite.position).to.eql({ x: 0.25, y: -4.95});
+    });    
+  });
+
+    
+  describe('Getting and setting properties', () => {
+    it('sets the velocity if the argument is properly formatted', () => {
+      const sprite = new Sprite();
+      sprite.velocity = { x: 1.0, y: 2.0 };
+      expect(sprite.velocity).to.eql({ x: 1.0, y: 2.0 });
+    });
+    it('doesn\'t set the velocity if the argument contains invalid values', () => {
+      const sprite = new Sprite();
+      sprite.velocity = { x: 1.0, z: 2.0 };
       expect(sprite.velocity).to.eql({ x: 0.0, y: 0.0 });
-      expect(sprite.position).to.eql({ x: 1.0, y: 2.0 });
     });
-    it('doesn\'t change position if we don\'t pass an argument', () => {
+    it('doesn\'t set the velocity if the arguments are strings', () => {
       const sprite = new Sprite();
-      sprite.position = { x: 1.0, y: 2.0 }
-      sprite.velocity = { x: 0.0, y: 0.0 }
-      sprite.updateSelf();
-      expect(sprite.position).to.eql({ x: 1.0, y: 2.0 });
+      sprite.velocity = { x: "hello", y: "number" };
+      expect(sprite.velocity).to.eql({ x: 0.0, y: 0.0 });      
     });
-    it('changes the position correctly for 1 second of time', () => {
+    
+    it('sets the velocity if the argument is properly formatted', () => {
       const sprite = new Sprite();
-      sprite.position = { x: 1.0, y: 2.0 }
-      sprite.velocity = { x: 1.0, y: 1.0 }
-      sprite.updateSelf(1.0);
-      expect(sprite.position).to.eql({ x: 2.0, y: 3.0 });
+      sprite.velocity = { x: 1.0, y: 2.0 };
+      expect(sprite.velocity).to.eql({ x: 1.0, y: 2.0 });
     });
-    it('changes the position correctly for 0.5 seconds of time', () => {
+    it('doesn\'t set the velocity if the argument contains invalid values', () => {
       const sprite = new Sprite();
-      sprite.position = { x: 1.0, y: 2.0 }
-      sprite.velocity = { x: 1.0, y: 1.0 }
-      sprite.updateSelf(0.5);
-      expect(sprite.position).to.eql({ x: 1.5, y: 2.5 });
+      sprite.velocity = { x: 1.0, z: 2.0 };
+      expect(sprite.velocity).to.eql({ x: 0.0, y: 0.0 });
     });
-    it('changes the position correctly for 0.5 seconds of time when velocities are negative', () => {
+    it('doesn\'t set the velocity if the arguments are strings', () => {
       const sprite = new Sprite();
-      sprite.position = { x: 10.0, y: 15.0 }
-      sprite.velocity = { x: -1.0, y: -2.0 }
-      sprite.updateSelf(0.5);
-      expect(sprite.position).to.eql({ x: 9.5, y: 14.0 });
-    });
-  });
+      sprite.velocity = { x: "hello", y: "number" };
+      expect(sprite.velocity).to.eql({ x: 0.0, y: 0.0 });      
+    });    
 
-  describe('setting attributes', () => {
-    it('sets the position when the argument is valid', () => {
+    it('sets the rotation with valid arg', () => {
       const sprite = new Sprite();
-      sprite.position = { x: 1.0, y: 2.0 }
-      expect(sprite.position.x).to.eql(1.0);
-      expect(sprite.position.y).to.eql(2.0);
+      sprite.rotation = 90;
+      expect(sprite.rotation).to.eql(90);            
     });
-    it('doesn\'t set the position when the argument is a string', () => {
+    it('doesn\'t set the rotation with string arg', () => {
       const sprite = new Sprite();
-      sprite.position = "hello";
-      expect(sprite.position.x).to.eql(0.0);
-      expect(sprite.position.y).to.eql(0.0);
+      sprite.rotation = "right angle";
+      expect(sprite.rotation).to.eql(0.0);            
     });
-    it('doesn\'t set the position when the argument doesn\'t have the right values', () => {
+    it('simplifies rotations above 360 degrees', () => {
       const sprite = new Sprite();
-      sprite.position = { q: 1, z: 1};
-      expect(sprite.position.x).to.eql(0.0);
-      expect(sprite.position.y).to.eql(0.0);
+      sprite.rotation = 390;
+      expect(sprite.rotation).to.eql(30);            
     });
-    it('sets the velocity when the argument is valid', () => {
+    it('simplifies rotations above 720 degrees', () => {
       const sprite = new Sprite();
-      sprite.velocity = { x: 1.0, y: 2.0 }
-      expect(sprite.velocity.x).to.eql(1.0);
-      expect(sprite.velocity.y).to.eql(2.0);
-    });
-    it('doesn\'t set the velocity when the argument is a string', () => {
+      sprite.rotation = 750;
+      expect(sprite.rotation).to.eql(30);            
+    });    
+    it('simplifies rotations below 0 degrees', () => {
       const sprite = new Sprite();
-      sprite.velocity = "hello";
-      expect(sprite.velocity.x).to.eql(0.0);
-      expect(sprite.velocity.y).to.eql(0.0);
+      sprite.rotation = -90;
+      expect(sprite.rotation).to.eql(270);            
     });
-    it('doesn\'t set the velocity when the argument doesn\'t have the right values', () => {
+    it('simplifies rotations below -360 degrees', () => {
       const sprite = new Sprite();
-      sprite.velocity = { q: 1, z: 1};
-      expect(sprite.velocity.x).to.eql(0.0);
-      expect(sprite.velocity.y).to.eql(0.0);
+      sprite.rotation = -420;
+      expect(sprite.rotation).to.eql(300);            
     });
-    it('doesn\'t set the velocity when the arguments aren\'t number', () => {
-      const sprite = new Sprite();
-      sprite.velocity = { x: 1, y: "hello"};
-      expect(sprite.velocity.x).to.eql(0.0);
-      expect(sprite.velocity.y).to.eql(0.0);
-    });
-    it('sets the rotation when the argument is valid', () => {
-      const sprite = new Sprite();
-      sprite.rotation = 3.5;
-      expect(sprite.rotation).to.eql(3.5);
-    });
-    it('doesn\'t set the rotation when the argument is in valid', () => {
-      const sprite = new Sprite();
-      sprite.rotation = "hello";
-      expect(sprite.rotation).to.eql(0.0);
-    });
-  });
 
+    
+  });
+  
+  
   describe('Instantiation', () => {
-    it('should create a new sprite with x and y coordinates that default to 0', () => {
+    
+    it('has default x and y coordinates', () => {
       const sprite = new Sprite();
-      expect(sprite.position.x).to.eql(0);
-      expect(sprite.position.y).to.eql(0);
-    });
-    it('should create a new sprite with x and y velocity that default to 0', () => {
-      const sprite = new Sprite();
+      expect(sprite.velocity).to.not.be.undefined;
       expect(sprite.velocity.x).to.eql(0);
-      expect(sprite.velocity.y).to.eql(0);
-    });
-    it('should create a new sprite with rotation 0', () => {
+      expect(sprite.velocity.y).to.eql(0);      
+    });    
+    it('has default velocity', () => {
       const sprite = new Sprite();
-      expect(sprite.rotation).to.eql(0);
+      expect(sprite.velocity).to.not.be.undefined;
+      expect(sprite.velocity.x).to.eql(0);
+      expect(sprite.velocity.y).to.eql(0);      
     });
+    it('has default rotation', () => {
+      const sprite = new Sprite();
+      expect(sprite.rotation).to.eql(0);      
+    });    
   });
 });
