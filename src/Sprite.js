@@ -4,6 +4,15 @@ export default class Sprite {
     this._velocity = { x: 0.0, y: 0.0 }
     this._rotation = 0;
   }
+
+  updateSelf(elapsedTime) {
+    if (!elapsedTime) {
+      return;
+    }
+    this._position.x = this._position.x + this._velocity.x * elapsedTime;
+    this._position.y = this._position.y + this._velocity.y * elapsedTime;
+  }
+
   get position() {
     return this._position;
   }

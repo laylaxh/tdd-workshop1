@@ -2,6 +2,45 @@ import { expect } from 'chai';
 import Sprite from '../src/Sprite';
 
 describe('Sprite', () => {
+  describe('updating position', () => {
+    it('doesn\'t change position if velocity is zero', () => {
+      const sprite = new Sprite();
+      sprite.position = { x: 1.0, y: 2.0 }
+      sprite.velocity = { x: 0.0, y: 0.0 }
+      sprite.updateSelf(1.0);
+      expect(sprite.velocity).to.eql({ x: 0.0, y: 0.0 });
+      expect(sprite.position).to.eql({ x: 1.0, y: 2.0 });
+    });
+    it('doesn\'t change position if we don\'t pass an argument', () => {
+      const sprite = new Sprite();
+      sprite.position = { x: 1.0, y: 2.0 }
+      sprite.velocity = { x: 0.0, y: 0.0 }
+      sprite.updateSelf();
+      expect(sprite.position).to.eql({ x: 1.0, y: 2.0 });
+    });
+    it('changes the position correctly for 1 second of time', () => {
+      const sprite = new Sprite();
+      sprite.position = { x: 1.0, y: 2.0 }
+      sprite.velocity = { x: 1.0, y: 1.0 }
+      sprite.updateSelf(1.0);
+      expect(sprite.position).to.eql({ x: 2.0, y: 3.0 });
+    });
+    it('changes the position correctly for 0.5 seconds of time', () => {
+      const sprite = new Sprite();
+      sprite.position = { x: 1.0, y: 2.0 }
+      sprite.velocity = { x: 1.0, y: 1.0 }
+      sprite.updateSelf(0.5);
+      expect(sprite.position).to.eql({ x: 1.5, y: 2.5 });
+    });
+    it('changes the position correctly for 0.5 seconds of time when velocities are negative', () => {
+      const sprite = new Sprite();
+      sprite.position = { x: 10.0, y: 15.0 }
+      sprite.velocity = { x: -1.0, y: -2.0 }
+      sprite.updateSelf(0.5);
+      expect(sprite.position).to.eql({ x: 9.5, y: 14.0 });
+    });
+  });
+
   describe('setting attributes', () => {
     it('sets the position when the argument is valid', () => {
       const sprite = new Sprite();
